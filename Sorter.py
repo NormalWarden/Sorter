@@ -1,71 +1,70 @@
-#импорт всех библиотек
 from os import listdir
 from pathlib import Path
 from shutil import move
 from tkinter import *
 from tkinter import ttk, messagebox, filedialog
 
-#инициализация функций
 def sort():
 	try:
-		path = filedialog.askdirectory() #путь
-		content = listdir(path) #все файлы
-		number = len(content) #количсетво файлов в папке
+		path = filedialog.askdirectory() #main path
+		content = listdir(path) #all files
+		number = len(content) #count of files
 
-		#сортировка
+		#sort
 		for i in range(number):
-			a = Path(path + content[i]).suffix #расширение файла
+			a = Path(path + content[i]).suffix
 			src = path + '\\' + content[i]
 			
-			#архив
+			#archive
 			if a in archive:
-				dst = path + '\\' + 'Archives\\' + content[i] #путь для архивов
+				dst = path + '\\' + 'Archives\\' + content[i]
 				move(src, dst)
-			#картинка
+
+			#image
 			elif a in picture:
-				dst = path + '\\' + 'Pictures\\' + content[i] ##путь для картинок
+				dst = path + '\\' + 'Pictures\\' + content[i]
 				move(src, dst)
 
-			#видео
+			#video
 			elif a in video:
-				dst = path + '\\' + 'Video\\' + content[i] ##путь для видео
+				dst = path + '\\' + 'Video\\' + content[i]
 				move(src, dst)
 
-			#текстовый документ
+			#document
 			elif a in document:
-				dst = path + '\\' + 'Documents\\' + content[i] ##путь для документов
+				dst = path + '\\' + 'Documents\\' + content[i]
 				move(src, dst)
 
-			#музыка
+			#music
 			elif a in music:
-				dst = path + '\\' + 'Music\\' + content[i] ##путь для музыки
+				dst = path + '\\' + 'Music\\' + content[i]
 				move(src, dst)
 
-			#приложение
+			#app
 			elif a in exe:
-				dst = path + '\\' + 'Programms\\' + content[i] ##путь для приложений
+				dst = path + '\\' + 'Programms\\' + content[i]
 				move(src, dst)
 
-			#торрент
+			#torrent
 			elif a in torrent:
-				dst = path + '\\' + 'Torrents\\' + content[i] ##путь для торрент файлов
+				dst = path + '\\' + 'Torrents\\' + content[i]
 				move(src, dst)
 
 			if i==number-1:
-				messagebox.showinfo('Конец', 
-					                'Сортировка выполнена')
+				messagebox.showinfo('End', 
+					                'Sorting is complete')
 
 	except FileNotFoundError:
-		messagebox.showerror('Ошибка', 
-			                 'Такого пути не существует')
+		messagebox.showerror('Error', 
+			                 'File not found')
 
-#инициализация интерфейса
+#Initializing
 root = Tk()
 root.title('Sorter')
 root.geometry('200x45')
 root.iconbitmap('icon.ico')
-messagebox.showinfo('Ознакомление', 
-	                'Для того, чтобы отсортировать папку вам нужно:\n 1. Нажать кнопку BROWSE AND SORT \n 2. Выбрать нужную папку \n 3. Нажать Ок')
+messagebox.showinfo('Introduction', 
+	                '1. Click BROWSE AND SORT \n 2. Choose folder \n 3. Ok')
 
 
 btn = ttk.Button(text='BROWSE AND SORT', 
@@ -74,13 +73,13 @@ btn = ttk.Button(text='BROWSE AND SORT',
 btn.place(x=43, 
 	      y=10)
 
-#расширения
-archive = ['.rar', '.zip'] #расширения архива
-picture = ['.png', '.jpg', '.jpeg', '.gif', '.tif', '.bmp', '.ico' ] #расширение картинки
-video = ['.mpeg', '.avi', '.mp4'] #расширение видео
-document = ['.doc', '.xls', '.txt', '.ppt', ] #расширения текстовых документов
-music = ['.mp3'] #расширения музыки
-exe = ['.exe', '.lnk'] #расширение приложения
-torrent = ['.torrent'] #расширение для торрентов
+#Expansions
+archive = ['.rar', '.zip']
+picture = ['.png', '.jpg', '.jpeg', '.gif', '.tif', '.bmp', '.ico' ]
+video = ['.mpeg', '.avi', '.mp4']
+document = ['.doc', '.xls', '.txt', '.ppt', ]
+music = ['.mp3']
+exe = ['.exe', '.lnk']
+torrent = ['.torrent']
 
 root.mainloop()  
