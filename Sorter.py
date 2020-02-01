@@ -1,4 +1,4 @@
-from os import listdir
+from os import listdir, mkdir
 from pathlib import Path
 from shutil import move
 from tkinter import *
@@ -10,42 +10,42 @@ def sort():
 		content = listdir(path) #all files
 		number = len(content) #count of files
 
+		#check of folders
+		for i in range(len(folders)):
+			if (folders[i] in content) == False:
+				mkdir(path + '\\' + folders[i])
+			else:
+				folders.pop(fodlerName)
+				
 		#sort
 		for i in range(number):
 			a = Path(path + content[i]).suffix
 			src = path + '\\' + content[i]
 			
-			#archive
 			if a in archive:
 				dst = path + '\\' + 'Archives\\' + content[i]
 				move(src, dst)
 
-			#image
 			elif a in picture:
 				dst = path + '\\' + 'Pictures\\' + content[i]
 				move(src, dst)
 
-			#video
 			elif a in video:
 				dst = path + '\\' + 'Video\\' + content[i]
 				move(src, dst)
 
-			#document
 			elif a in document:
 				dst = path + '\\' + 'Documents\\' + content[i]
 				move(src, dst)
 
-			#music
 			elif a in music:
 				dst = path + '\\' + 'Music\\' + content[i]
 				move(src, dst)
 
-			#app
 			elif a in exe:
 				dst = path + '\\' + 'Programms\\' + content[i]
 				move(src, dst)
 
-			#torrent
 			elif a in torrent:
 				dst = path + '\\' + 'Torrents\\' + content[i]
 				move(src, dst)
@@ -81,5 +81,7 @@ document = ['.doc', '.xls', '.txt', '.ppt', ]
 music = ['.mp3']
 exe = ['.exe', '.lnk']
 torrent = ['.torrent']
+
+folders = ['Archives', 'Pictures', 'Video', 'Documents', 'Music', 'Programms', 'Torrents'] #Folders for sort
 
 root.mainloop()  
